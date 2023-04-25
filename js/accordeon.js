@@ -1,16 +1,21 @@
 const btnsWrapper = document.querySelector(".feature-list");
+const btns = btnsWrapper.querySelectorAll(".feature__link");
+const list = btnsWrapper.querySelectorAll(".feature-sub");
+
 btnsWrapper.addEventListener("click", (e) => {
-  if (e.target.closest("button").classList.contains("feature__link_active")) {
-    e.target.closest("button").classList.remove("feature__link_active");
-    e.target
+  if (e.target.closest("button")) {
+    let button = e.target.closest("button");
+    let content = e.target
       .closest(".feature__item")
-      .querySelector(".feature-sub")
-      .classList.add("hidden");
-  } else {
-    e.target.closest("button").classList.add("feature__link_active");
-    e.target
-      .closest(".feature__item")
-      .querySelector(".feature-sub")
-      .classList.remove("hidden");
+      .querySelector(".feature-sub");
+    btns.forEach((btn, index) => {
+      if (button === btn) {
+        btn.classList.toggle("feature__link_active");
+        list[index].classList.toggle("hidden");
+      } else {
+        btn.classList.remove("feature__link_active");
+        list[index].classList.add("hidden");
+      }
+    });
   }
 });
